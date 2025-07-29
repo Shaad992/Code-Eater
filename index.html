@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CODE EATER - Emira Trip</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      * {
+  -webkit-tap-highlight-color: transparent;
+}
+    }
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: #fdfdfd;
+      transition: background 0.6s ease;
+      overflow-x: hidden;
+    }
+
+    .firefly {
+      position: fixed;
+      width: 5px;
+      height: 5px;
+      background: cyan;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: fly 10s linear infinite;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    @keyframes fly {
+      0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) translateX(100vw);
+        opacity: 0;
+      }
+    }
+
+    .fireflies {
+      display: none;
+    }
+
+    .dark-bg .fireflies {
+      display: block;
+    }
+
+    header {
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 16px;
+      padding: 20px 35px;
+      box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.15),
+        inset 0 1px 1px rgba(255,255,255,0.6),
+        inset 0 -2px 3px rgba(0,0,0,0.05);
+      text-align: center;
+      margin: 20px auto;
+      width: fit-content;
+      position: relative;
+      z-index: 2;
+      background-color: white;
+    }
+
+    h1 {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    h1 span {
+      font-size: 1.5rem;
+      color: #111;
+      display: inline-block;
+      animation: bounce 1.8s ease-in-out infinite;
+      transform: rotateY(15deg);
+      text-shadow: 1px 1px 0 #ccc, 2px 2px 4px rgba(0,0,0,0.15);
+    }
+
+    h1 span:nth-child(2n) {
+      transform: rotateY(-15deg);
+    }
+
+    h1 span:nth-child(5) {
+      width: 12px;
+      transform: none;
+      animation: none;
+    }
+
+    h1 span:nth-child(1) { animation-delay: 0s; }
+    h1 span:nth-child(2) { animation-delay: 0.1s; }
+    h1 span:nth-child(3) { animation-delay: 0.2s; }
+    h1 span:nth-child(4) { animation-delay: 0.3s; }
+    h1 span:nth-child(6) { animation-delay: 0.4s; }
+    h1 span:nth-child(7) { animation-delay: 0.5s; }
+    h1 span:nth-child(8) { animation-delay: 0.6s; }
+    h1 span:nth-child(9) { animation-delay: 0.7s; }
+    h1 span:nth-child(10){ animation-delay: 0.8s; }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0) rotateY(15deg); }
+      50% { transform: translateY(-10px) rotateY(15deg); }
+    }
+
+    h2 {
+      font-size: 0.9rem;
+      color: #333;
+      margin-top: 8px;
+      letter-spacing: 0.6px;
+      text-shadow: 1px 1px 0 #ddd, 1.5px 1.5px 3px rgba(0,0,0,0.08);
+    }
+
+    .button-frame {
+      margin: 10px auto;
+      padding: 30px 40px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.3);
+      box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.15),
+        inset 0 1px 1px rgba(255,255,255,0.4),
+        inset 0 -2px 3px rgba(0,0,0,0.05);
+      width: 70%;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    button {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.85rem;
+      padding: 10px 20px;
+      border: none;
+      background: #eee;
+      border-radius: 10px;
+      box-shadow:
+        inset 0 -3px 5px rgba(0,0,0,0.2),
+        0 5px 10px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease, background 0.3s ease;
+      cursor: pointer;
+      outline: none;
+      user-select: none;
+    }
+
+    button:focus {
+      outline: none;
+      box-shadow: none;
+    }
+
+    button:active {
+      transform: translateY(2px);
+    }
+
+    button::-moz-focus-inner {
+      border: 0;
+    }
+
+.footer-toggle {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  height: 50px;
+  width: 50px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 25px;
+  color: cyan;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 15px rgba(0, 255, 255, 0.4);
+  transition: width 0.5s ease, padding 0.5s ease;
+  overflow: hidden;
+  z-index: 999;
+}
+
+.footer-toggle .arrow {
+  font-size: 20px;
+  transition: transform 0.3s ease;
+  pointer-events: none;
+}
+
+.footer-toggle .footer-text {
+  margin-left: 10px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.footer-toggle.open {
+  width: 220px;
+  justify-content: flex-start;
+  padding-left: 15px;
+}
+
+.footer-toggle.open .arrow {
+  transform: rotate(180deg);
+}
+
+.footer-toggle.open .footer-text {
+  opacity: 1;
+}
+
+/* 🔵 Blue color click effect hatane ke liye */
+.footer-toggle:focus,
+.footer-toggle:active {
+  outline: none;
+  box-shadow: none;
+}
+
+/* 🔵 Mobile tap effect remove */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+    .arrow {
+      transition: transform 0.6s ease;
+      font-size: 1.2rem;
+      color: cyan;
+      text-shadow: 0 0 3px cyan, 0 0 5px cyan;
+    }
+
+    .footer-toggle.open .arrow {
+      transform: rotate(180deg);
+    }
+
+    .dark-bg {
+      background: #1a1a1a;
+    }
+  </style>
+</head>
+<body>
+  <div class="fireflies">
+    <div class="firefly" style="top:90%; left:5%; animation-delay: 0s;"></div>
+    <div class="firefly" style="top:85%; left:25%; animation-delay: 2s;"></div>
+    <div class="firefly" style="top:80%; left:45%; animation-delay: 4s;"></div>
+    <div class="firefly" style="top:88%; left:65%; animation-delay: 6s;"></div>
+    <div class="firefly" style="top:82%; left:85%; animation-delay: 8s;"></div>
+  </div>
+
+  <header>
+    <h1>
+      <span>C</span><span>O</span><span>D</span><span>E</span><span>&nbsp;</span>
+      <span>E</span><span>A</span><span>T</span><span>E</span><span>R</span>
+    </h1>
+    <h2>Emira Trip</h2>
+  </header>
+
+  <div class="button-frame">
+<div class="buttons">
+  <a href="expenses.html"><button>EXPENSES</button></a>
+  <a href="notes.html"><button>NOTES</button></a>
+  <a href="import.html"><button>IMPORT</button></a>
+  <a href="export.html"><button>EXPORT</button></a>
+  <a href="reexport.html"><button>RE-EXPORT</button></a>
+</div>
+  </div>
+
+  <button class="footer-toggle" onclick="toggleFooter(this)">
+    <span class="arrow">➤</span>
+    <span class="footer-text">MADE BY SHAAD</span>
+  </button>
+
+  <script>
+function toggleFooter(el) {
+  el.classList.toggle("open");
+  document.body.classList.toggle("dark-bg");
+}
+  </script>
+</body>
+</html>
