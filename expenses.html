@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expenses - CODE EATER</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <style>
+  
+  * {
+  -webkit-tap-highlight-color: transparent;
+}
+  
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    body {
+      background-color: white;
+      color: black;
+      overflow-x: hidden;
+    }
+
+    .header {
+      background: rgba(255, 255, 255, 0.7);
+      border: 2px solid rgba(0, 0, 0, 0.5);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(8px);
+      padding: 10px 20px;
+      text-align: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+    }
+
+    .header h1 {
+      font-size: 2rem;
+      display: inline-flex;
+      gap: 4px;
+    }
+
+    .header h1 span {
+      display: inline-block;
+      animation: bounce 1s ease-in-out infinite alternate;
+    }
+
+    .header h1 span:nth-child(odd) {
+      animation-delay: 0.1s;
+    }
+
+    .header h1 span:nth-child(even) {
+      animation-delay: 0.3s;
+    }
+
+    @keyframes bounce {
+      from { transform: translateY(0); }
+      to { transform: translateY(-6px); }
+    }
+
+    .container {
+      margin-top: 140px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    .card {
+      padding: 2rem;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.6);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .card p {
+      font-size: 1.1rem;
+      text-align: center;
+    }
+
+    .home-button {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    .glass-btn {
+      padding: 0.7rem 1.5rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(0, 0, 0, 0.2);
+      border-radius: 14px;
+      color: black;
+      font-size: 1rem;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .glass-btn:hover {
+      transform: scale(1.04);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    }
+
+    .expense-item {
+      list-style: none;
+      padding: 0.5rem;
+      margin-bottom: 0.5rem;
+      background: rgba(255,255,255,0.5);
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #recycleBinList li {
+      list-style: none;
+      background: rgba(255, 0, 0, 0.1);
+      border: 1px dashed red;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>
+      <span>E</span><span>X</span><span>P</span><span>E</span><span>N</span><span>S</span><span>E</span><span>S</span>
+    </h1>
+    <div class="home-button">
+      <button onclick="location.href='index.html'" class="glass-btn">HOME</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Add Expense Card -->
+    <div class="card">
+      <p>Add Your Expense</p>
+      <input type="text" id="expenseName" placeholder="Expense Name" style="margin:10px; padding:10px;" />
+      <input type="number" id="expenseAmount" placeholder="Amount" style="margin:10px; padding:10px;" />
+      <button onclick="addExpense()" class="glass-btn">Add Entry</button>
+      <div style="margin-top: 1rem; text-align:center;">
+        <p id="totalAmount">Total: ₹0</p>
+      </div>
+    </div>
+
+    <!-- Show Recycle Bin Button -->
+    <div class="home-button">
+      <button onclick="toggleRecycleBin()" class="glass-btn">Show Recycle Bin</button>
+    </div>
+
+    <!-- List of Active Expenses -->
+    <ul id="expenseList" style="width:100%; max-width:500px; margin-top: 1rem;"></ul>
+
+    <!-- Recycle Bin Entries -->
+    <ul id="recycleBinList" style="width:100%; max-width:500px; margin-top:1rem; display:none;"></ul>
+  </div>
+
+  <!-- Firebase Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, addDoc, getDoc, getDocs, onSnapshot, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAdQPwSuIUCg-IzQyAT_bbLc-RcH08F4pk",
+      authDomain: "expenses-e37a3.firebaseapp.com",
+      projectId: "expenses-e37a3",
+      storageBucket: "expenses-e37a3.appspot.com",
+      messagingSenderId: "747936175998",
+      appId: "1:747936175998:web:cc4f7bf3800488c3afc52f"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const expensesRef = collection(db, "expenses");
+
+    // Render Active Expenses
+    function renderExpenses(snapshot) {
+      const list = document.getElementById("expenseList");
+      const total = document.getElementById("totalAmount");
+      list.innerHTML = "";
+      let sum = 0;
+
+      snapshot.forEach(docSnap => {
+        const data = docSnap.data();
+        sum += data.amount;
+
+        const item = document.createElement("li");
+        item.className = "expense-item";
+
+        const dateObj = data.createdAt?.toDate?.();
+        const dateStr = dateObj ? dateObj.toLocaleString() : "No Date";
+
+        item.innerHTML = `
+          <div>
+            <strong>${data.name}</strong> - ₹${data.amount}<br>
+            <small style="color: gray;">${dateStr}</small>
+          </div>
+          <button class="glass-btn" onclick="deleteExpense('${docSnap.id}')">Delete</button>
+        `;
+
+        list.appendChild(item);
+      });
+
+      total.textContent = `Total: ₹${sum}`;
+    }
+
+    // Add Expense
+    window.addExpense = async function () {
+      const name = document.getElementById("expenseName").value;
+      const amount = parseFloat(document.getElementById("expenseAmount").value);
+
+      if (name && !isNaN(amount)) {
+        await addDoc(expensesRef, {
+          name,
+          amount,
+          createdAt: new Date()
+        });
+
+        document.getElementById("expenseName").value = '';
+        document.getElementById("expenseAmount").value = '';
+      }
+    };
+
+    // Delete and move to Recycle Bin
+    window.deleteExpense = async function (id) {
+      const expenseDoc = doc(db, "expenses", id);
+      const docSnap = await getDoc(expenseDoc);
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        await addDoc(collection(db, "deletedExpenses"), data);
+        await deleteDoc(expenseDoc);
+      }
+    };
+
+    // Toggle Recycle Bin
+    window.toggleRecycleBin = async function () {
+      const bin = document.getElementById("recycleBinList");
+      if (bin.style.display === "none") {
+        bin.style.display = "block";
+        bin.innerHTML = "<p style='text-align:center;'>Loading deleted expenses...</p>";
+
+        const querySnapshot = await getDocs(collection(db, "deletedExpenses"));
+        bin.innerHTML = "";
+
+        if (querySnapshot.empty) {
+          bin.innerHTML = "<p style='text-align:center;'>No deleted expenses found.</p>";
+        } else {
+          querySnapshot.forEach(docSnap => {
+            const data = docSnap.data();
+            const dateObj = data.createdAt?.toDate?.();
+            const dateStr = dateObj ? dateObj.toLocaleString() : "No Date";
+
+            const item = document.createElement("li");
+            item.innerHTML = `
+              <div>
+                <strong>${data.name}</strong> - ₹${data.amount}<br>
+                <small style="color: gray;">${dateStr}</small>
+              </div>
+            `;
+            bin.appendChild(item);
+          });
+        }
+      } else {
+        bin.style.display = "none";
+      }
+    };
+
+    // Realtime Sync
+    onSnapshot(expensesRef, renderExpenses);
+  </script>
+</body>
+</html>
