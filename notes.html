@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Notes - CODE EATER</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Orbitron', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: #fff;
+      color: black;
+      overflow-x: hidden;
+    }
+
+    .firefly-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .firefly {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.8);
+      width: 6px;
+      height: 6px;
+      box-shadow: 0 0 8px 3px rgba(0, 0, 0, 0.6);
+      animation: move 10s linear infinite;
+    }
+
+    @keyframes move {
+      0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0.3;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) translateX(100vw);
+        opacity: 0;
+      }
+    }
+
+    .header {
+      background: rgba(255, 255, 255, 0.7);
+      border: 2px solid rgba(0, 0, 0, 0.5);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(8px);
+      padding: 10px 20px;
+      text-align: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+    }
+
+    .header h1 {
+      font-size: 2rem;
+      display: inline-flex;
+      gap: 4px;
+    }
+
+    .header h1 span {
+      display: inline-block;
+      animation: bounce 1s ease-in-out infinite alternate;
+    }
+
+    .header h1 span:nth-child(odd) { animation-delay: 0.1s; }
+    .header h1 span:nth-child(even) { animation-delay: 0.3s; }
+
+    @keyframes bounce {
+      from { transform: translateY(0); }
+      to { transform: translateY(-6px); }
+    }
+
+    .home-button {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    .glass-btn {
+      padding: 0.7rem 1.5rem;
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid rgba(0, 0, 0, 0.2);
+      border-radius: 14px;
+      color: black;
+      font-size: 1rem;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .glass-btn:hover {
+      transform: scale(1.04);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    }
+
+    .container {
+      margin-top: 140px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    .card {
+      padding: 2rem;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.6);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .card p {
+      font-size: 1.2rem;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    input, textarea {
+      margin: 10px 0;
+      padding: 10px;
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(5px);
+      font-size: 1rem;
+      outline: none;
+    }
+
+    ul {
+      width: 100%;
+      max-width: 500px;
+      margin-top: 1rem;
+      padding: 0;
+    }
+
+    .note-item {
+      list-style: none;
+      padding: 0.8rem;
+      margin-bottom: 0.7rem;
+      background: rgba(255,255,255,0.5);
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .note-item strong {
+      font-size: 1rem;
+    }
+
+    .note-item small {
+      font-size: 0.85rem;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🔥 Firefly Background -->
+  <div class="firefly-bg">
+    <div class="firefly" style="top: 80%; left: 20%; animation-delay: 0s;"></div>
+    <div class="firefly" style="top: 50%; left: 60%; animation-delay: 2s;"></div>
+    <div class="firefly" style="top: 70%; left: 80%; animation-delay: 4s;"></div>
+    <div class="firefly" style="top: 30%; left: 10%; animation-delay: 1s;"></div>
+    <div class="firefly" style="top: 60%; left: 40%; animation-delay: 3s;"></div>
+  </div>
+
+  <!-- 🚀 Header -->
+  <div class="header">
+    <h1>
+      <span>N</span><span>O</span><span>T</span><span>E</span><span>S</span>
+    </h1>
+    <div class="home-button">
+      <button onclick="location.href='index.html'" class="glass-btn">HOME</button>
+    </div>
+  </div>
+
+  <!-- ✍️ Content -->
+  <div class="container">
+    <div class="card">
+      <p>Add Your Note</p>
+      <input type="text" id="noteTitle" placeholder="Note Title" />
+      <textarea id="noteContent" placeholder="Note Content"></textarea>
+      <button onclick="addNote()" class="glass-btn">Add Note</button>
+    </div>
+
+    <ul id="noteList"></ul>
+  </div>
+
+  <!-- 🔗 Firebase -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAdQPwSuIUCg-IzQyAT_bbLc-RcH08F4pk",
+      authDomain: "expenses-e37a3.firebaseapp.com",
+      projectId: "expenses-e37a3",
+      storageBucket: "expenses-e37a3.appspot.com",
+      messagingSenderId: "747936175998",
+      appId: "1:747936175998:web:cc4f7bf3800488c3afc52f"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const notesRef = collection(db, "notes");
+
+    function renderNotes(snapshot) {
+      const list = document.getElementById("noteList");
+      list.innerHTML = "";
+
+      snapshot.forEach(docSnap => {
+        const data = docSnap.data();
+        const item = document.createElement("li");
+        item.className = "note-item";
+        item.innerHTML = `
+          <div>
+            <strong>${data.title}</strong><br>
+            <small>${data.content}</small>
+          </div>
+          <button class="glass-btn" onclick="deleteNote('${docSnap.id}')">Delete</button>
+        `;
+        list.appendChild(item);
+      });
+    }
+
+    window.addNote = async function () {
+      const title = document.getElementById("noteTitle").value;
+      const content = document.getElementById("noteContent").value;
+
+      if (title && content) {
+        await addDoc(notesRef, { title, content });
+        document.getElementById("noteTitle").value = '';
+        document.getElementById("noteContent").value = '';
+      }
+    };
+
+    window.deleteNote = async function (id) {
+      await deleteDoc(doc(db, "notes", id));
+    };
+
+    onSnapshot(notesRef, renderNotes);
+  </script>
+</body>
+</html>
