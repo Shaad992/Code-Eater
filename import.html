@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Import - CODE EATER</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <style>
+  
+    * {
+  -webkit-tap-highlight-color: transparent;
+}
+  
+  
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: #ffffff;
+      color: #000;
+      overflow-x: hidden;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      z-index: 1000;
+      text-align: center;
+      padding: 20px 10px 10px;
+    }
+
+    .heading {
+      font-size: 2.5em;
+      font-weight: bold;
+      color: #000;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+      display: inline-block;
+    }
+
+    .heading span {
+      display: inline-block;
+      animation: bounce 1.2s ease forwards;
+    }
+
+    /* Delay bounce per letter */
+    .heading span:nth-child(1) { animation-delay: 0.1s; }
+    .heading span:nth-child(2) { animation-delay: 0.2s; }
+    .heading span:nth-child(3) { animation-delay: 0.3s; }
+    .heading span:nth-child(4) { animation-delay: 0.4s; }
+    .heading span:nth-child(5) { animation-delay: 0.5s; }
+    .heading span:nth-child(6) { animation-delay: 0.6s; }
+    .heading span:nth-child(7) { animation-delay: 0.7s; }
+    .heading span:nth-child(8) { animation-delay: 0.8s; }
+    .heading span:nth-child(9) { animation-delay: 0.9s; }
+    .heading span:nth-child(10) { animation-delay: 1s; }
+
+    @keyframes bounce {
+      0%   { transform: translateY(-80px); opacity: 0; }
+      40%  { transform: translateY(30px); opacity: 1; }
+      60%  { transform: translateY(-15px); }
+      80%  { transform: translateY(8px); }
+      100% { transform: translateY(0); }
+    }
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.home-button {
+  background: rgba(255, 255, 255, 0.8);
+  color: black;
+  border: 2px solid #000;
+  padding: 6px 14px;
+  border-radius: 12px;
+  font-size: 0.9em;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.home-button:hover {
+  background: #000;
+  color: #fff;
+}
+
+    .home-button:hover {
+      background: #000;
+      color: #fff;
+    }
+
+    .content {
+      padding: 80px 20px 60px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .point {
+      background: #f9f9f9;
+      margin: 20px 0;
+      padding: 20px;
+      border-radius: 18px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease;
+    }
+
+    .point:hover {
+      transform: translateY(-4px);
+    }
+
+    .point h2 {
+      margin-bottom: 10px;
+      font-size: 1.4em;
+      color: #111;
+    }
+
+    .point p {
+      font-size: 1em;
+      line-height: 1.6;
+      color: #333;
+    }
+    
+    .point-image {
+  width: 100%;
+  max-width: 800px;
+  margin-top: 15px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+
+.point-image:hover {
+  transform: scale(1.03);
+}
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="heading">
+      <span>I</span><span>M</span><span>P</span><span>O</span><span>R</span><span>T</span>
+    </div><br/>
+
+  </header>
+  
+    <div class="content">
+  
+  <div class="button-container">
+    <a href="index.html" class="home-button">Home</a>
+  </div>
+
+  <div class="content">
+
+    <div class="point">
+      
+                  <img src="https://res.cloudinary.com/dktxmi2qq/image/upload/v1753858112/images_2_12_kfpqgy.jpg" alt="Wood Cutting in Cameroon" class="point-image">
+      <h2>1. Wood Cutting (Kaati ka Process)</h2>
+      
+
+      <p>Cameroon ke dense forests me wood cutting ka kaam government-approved areas me hota hai. Trained workers chainsaws aur manual tools ka use karke specific tree species ko cut karte hain — jinka demand international market me hota hai. Har cutting pe proper license aur environmental norms ka dhyan rakha jata hai.</p>
+      
+
+    </div>
+
+    <div class="point">
+      
+                  <img src="https://res.cloudinary.com/dktxmi2qq/image/upload/v1753858161/images_2_13_aba28w.jpg" alt="Wood Cutting in Cameroon" class="point-image">
+      <h2>2. Transport to Port (Jungle se Port tak Safar)</h2>
+      <p>Cut ki gayi wood logs ko bade trucks me carefully load kiya jata hai. Fir unhe long-distance highways ke zariye Douala Port tak le jaya jata hai. Is phase me road tax, weighment aur security check hoti hai taaki sab kuch legal ho.</p>
+    </div>
+
+    <div class="point">
+      
+                        <img src="https://res.cloudinary.com/dktxmi2qq/image/upload/v1753858134/images_2_15_pmenaz.jpg" alt="Wood Cutting in Cameroon" class="point-image">
+      <h2>3. Export Documentation (Legal Paperwork)</h2>
+      <p>Export ke liye proper documentation taiyaar kiya jata hai jaise - Commercial Invoice, Packing List, Bill of Lading, Phytosanitary Certificate, aur Customs Clearance. Ye sab documents ensure karte hain ki wood legally aur safely border cross kar sake.</p>
+    </div>
+
+    <div class="point">
+      
+                        <img src="https://res.cloudinary.com/dktxmi2qq/image/upload/v1753858085/images_2_17_odjfit.jpg" alt="Wood Cutting in Cameroon" class="point-image">
+      <h2>4. Sea Shipment (Ship se Dubai Safar)</h2>
+      <p>Sab documents approve hone ke baad containers ko cargo ship me load kiya jata hai. Ye shipment Cameroon se Dubai tak samudri route ke zariye 25 se 35 din me pahuchta hai. Containers me wood ko moisture-proof tarike se pack kiya jata hai.</p>
+    </div>
+
+    <div class="point">
+      
+                        <img src="https://res.cloudinary.com/dktxmi2qq/image/upload/v1753852783/heading-image_xutzr9.jpg" alt="Wood Cutting in Cameroon" class="point-image">
+                        
+                      <h2>5. Dubai Arrival (Customs & Inspection)</h2>
+      <p>Dubai port par pahuchte hi customs officers wood shipment ko inspect karte hain. Agar sab kuch clear hota hai to shipment ko clearance mil jata hai. Kabhi kabhi quality ya document mismatch hone par delay ya penalty bhi lag sakti hai.</p>
+    </div>
+
+    <div class="point">
+      
+                        <img src="https://res.cloudinary.com/dktxmi2qq/image/upload/v1753858211/images_2_14_knjefw.jpg" alt="Wood Cutting in Cameroon" class="point-image">
+      
+      
+      
+      
+      <h2>6. Warehouse Handling (Unload & Sorting)</h2>
+      <p>Customs clear hone ke baad containers ko nearby warehouse me le jaya jata hai. Yahan logs ko unload karke safai, drying aur sorting ki jati hai. Kuch wood ko shape ya size ke hisab se process bhi kiya jata hai — demand ke mutabiq.</p>
+    </div>
+
+    <div class="point">
+      
+                        <img src="https://res.cloudinary.com/dktxmi2qq/image/upload/v1753858062/images_2_18_zn9wf5.jpg" alt="Wood Cutting in Cameroon" class="point-image">
+      
+      
+      
+      
+      <h2>7. Local Sale or Re-export (Aage ki Journey)</h2>
+      <p>Warehouse se wood ko local Dubai market me sell kiya jata hai ya fir kisi aur country (jaise India, China ya Europe) me re-export kiya jata hai. Ye depend karta hai ki current market demand kaha zyada hai aur kis rate pe buyer ready hai.</p>
+    </div>
+
+  </div>
+
+</body>
+</html>
