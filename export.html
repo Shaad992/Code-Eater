@@ -6,14 +6,14 @@
   <title>Export - CODE EATER</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
   <style>
-  
     * {
-  -webkit-tap-highlight-color: transparent;
-}
-  
-  
-    body {
+      -webkit-tap-highlight-color: transparent;
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
       font-family: 'Orbitron', sans-serif;
       background: #ffffff;
       color: #000;
@@ -45,17 +45,13 @@
       animation: bounce 1.2s ease forwards;
     }
 
-    /* Delay bounce per letter */
+    /* Bounce animation per letter */
     .heading span:nth-child(1) { animation-delay: 0.1s; }
     .heading span:nth-child(2) { animation-delay: 0.2s; }
     .heading span:nth-child(3) { animation-delay: 0.3s; }
     .heading span:nth-child(4) { animation-delay: 0.4s; }
     .heading span:nth-child(5) { animation-delay: 0.5s; }
     .heading span:nth-child(6) { animation-delay: 0.6s; }
-    .heading span:nth-child(7) { animation-delay: 0.7s; }
-    .heading span:nth-child(8) { animation-delay: 0.8s; }
-    .heading span:nth-child(9) { animation-delay: 0.9s; }
-    .heading span:nth-child(10) { animation-delay: 1s; }
 
     @keyframes bounce {
       0%   { transform: translateY(-80px); opacity: 0; }
@@ -65,36 +61,8 @@
       100% { transform: translateY(0); }
     }
 
-.button-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.home-button {
-  background: rgba(255, 255, 255, 0.8);
-  color: black;
-  border: 2px solid #000;
-  padding: 6px 14px;
-  border-radius: 12px;
-  font-size: 0.9em;
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.home-button:hover {
-  background: #000;
-  color: #fff;
-}
-
-    .home-button:hover {
-      background: #000;
-      color: #fff;
-    }
-
     .content {
-      padding: 80px 20px 60px;
+      padding: 120px 20px 60px;
       max-width: 900px;
       margin: auto;
     }
@@ -123,204 +91,134 @@
       line-height: 1.6;
       color: #333;
     }
-    
-    .point-image {
-  width: 100%;
-  max-width: 800px;
-  margin-top: 15px;
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
-  transition: transform 0.3s ease;
-}
 
-.point-image:hover {
-  transform: scale(1.03);
-}
+    .point-image {
+      width: 100%;
+      max-width: 800px;
+      margin-top: 15px;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .point-image:hover {
+      transform: scale(1.03);
+    }
+
+    /* Multi-color layered HOME button */
+    .button-container {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
+
+    .multi-btn {
+      position: relative;
+      padding: 10px 28px;
+      font-size: 1rem;
+      font-weight: bold;
+      color: white;
+      text-decoration: none;
+      background: transparent;
+      border-radius: 12px;
+      z-index: 0;
+      overflow: hidden;
+      border: none;
+      cursor: pointer;
+    }
+
+    .multi-btn::before {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      right: -4px;
+      bottom: -4px;
+      background: conic-gradient(red, yellow, lime, cyan, blue, magenta, red);
+      border-radius: 14px;
+      z-index: -2;
+      animation: rotate 3s linear infinite;
+    }
+
+    .multi-btn::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      right: 2px;
+      bottom: 2px;
+      background: black;
+      border-radius: 10px;
+      z-index: -1;
+    }
+
+    .multi-btn:hover {
+      transform: scale(1.05);
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body>
 
+  <!-- 🔠 Heading -->
   <header>
     <div class="heading">
       <span>E</span><span>X</span><span>P</span><span>O</span><span>R</span><span>T</span>
-    </div><br/>
-
+    </div>
   </header>
-  
-    <div class="content">
-  
-  <div class="button-container">
-    <a href="index.html" class="home-button">Home</a>
-  </div>
 
+  <!-- 🏠 Home Button -->
   <div class="content">
+    <div class="button-container">
+      <a href="index.html" class="multi-btn">HOME</a>
+    </div>
 
+    <!-- 📦 Export Points -->
     <div class="point">
-      
-                  <img src="https://res.cloudinary.com/dktxmi2qq/image/upload/v1753879237/images_2_25_ch7hjg.jpg" alt="Wood Cutting in Cameroon" class="point-image">
+      <img src="https://res.cloudinary.com/dktxmi2qq/image/upload/v1753879237/images_2_25_ch7hjg.jpg" alt="Company Registration" class="point-image">
       <h2>1. Company Registration & Related Expenses</h2>
-      
-
-      <p>Dubai me export business start karne ke liye sabse pehla step hota hai company registration. Aapko Dubai’s Department of Economic Development (DED) ya kisi Free Zone authority ke under apni company register karani hoti hai.
-
-Steps include:
-
-Trade name reservation
-
-Initial approval
-
-MOA (Memorandum of Association) drafting
-
-Office lease agreement (Ejari)
-
-Trade license issuance
-
-
-Expenses may include:
-
-License fees (AED 10,000–15,000 depending on activity)
-
-Office space rent (Free zone or mainland specific)
-
-Visa processing fees
-
-Immigration card & establishment card fees</p>
-      
-
+      <p>Dubai me export business start karne ke liye sabse pehla step hota hai company registration. Aapko Dubai’s Department of Economic Development (DED) ya kisi Free Zone authority ke under apni company register karani hoti hai...</p>
     </div>
 
     <div class="point">
-      
-                  <img src="https://res.cloudinary.com/dktxmi2qq/image/upload/v1753879237/images_2_24_awk0b0.jpg" alt="Wood Cutting in Cameroon" class="point-image">
+      <img src="https://res.cloudinary.com/dktxmi2qq/image/upload/v1753879237/images_2_24_awk0b0.jpg" alt="Certificates Required" class="point-image">
       <h2>2. Required Certificates for Export</h2>
-      <p>Dubai se legal export karne ke liye kuch mandatory certificates ki zarurat hoti hai:
-
-Certificate of Origin (Chamber of Commerce se)
-
-Commercial Invoice
-
-Packing List
-
-Export Declaration (via Dubai Customs portal)
-
-Phytosanitary Certificate (for wood or plant-based goods)
-
-Bill of Lading / Airway Bill (depending on shipment mode)
-
-Insurance Certificate (optional but recommended)</p>
+      <p>Dubai se legal export karne ke liye kuch mandatory certificates ki zarurat hoti hai: Certificate of Origin, Commercial Invoice, Packing List, Export Declaration, etc.</p>
     </div>
 
     <div class="point">
-      
-                        <img src="https://res.cloudinary.com/dktxmi2qq/image/upload/v1753879237/images_2_23_b0i6es.jpg" alt="Wood Cutting in Cameroon" class="point-image">
-      <h2>3. Working with LC (Letter of Credit) via Bank</h2>
-      <p>LC ek secure financial instrument hai jo exporter aur importer ke beech trust build karta hai.
-
-Process:
-
-Buyer (importer) apne bank se LC open karta hai
-
-LC ke terms predefined hote hain (amount, timeline, documents required, port details)
-
-Seller (exporter) apne bank ko LC receive hone par shipment prepare karta hai.</p>
+      <img src="https://res.cloudinary.com/dktxmi2qq/image/upload/v1753879237/images_2_23_b0i6es.jpg" alt="LC Process" class="point-image">
+      <h2>3. Working with LC (Letter of Credit)</h2>
+      <p>Buyer LC open karta hai, seller uske terms ke mutabiq shipment aur documents taiyaar karta hai.</p>
     </div>
 
     <div class="point">
-      
-                        <img src="https://res.cloudinary.com/dktxmi2qq/image/upload/v1753879238/images_2_20_rzub6s.jpg" alt="Wood Cutting in Cameroon" class="point-image">
-      <h2>4. How Payment Happens to Seller under LC</h2>
-      <p>Jab seller LC ke terms ke mutabiq saare documents prepare karta hai, to ye steps follow hote hain:
-
-i. Seller bank ko required documents deta hai (Invoice, B/L, Certificate of Origin etc.)
-
-
-ii. Bank documents ko verify karta hai
-
-
-iii. Agar sab kuch LC terms ke mutabiq hai, to bank payment release karta hai seller ke account me
-
-
-iv. Uske baad bank documents buyer ke bank ko forward karta hai
-
-
-
-Note: Ye pura process buyer aur seller dono ke liye risk-free banata hai.</p>
+      <img src="https://res.cloudinary.com/dktxmi2qq/image/upload/v1753879238/images_2_20_rzub6s.jpg" alt="LC Payment" class="point-image">
+      <h2>4. Payment under LC</h2>
+      <p>Seller documents submit karta hai bank me. Bank verify karke payment release karta hai if everything matches LC terms.</p>
     </div>
 
     <div class="point">
-      
-                        <img src="https://res.cloudinary.com/dktxmi2qq/image/upload/v1753879238/images_2_22_re6mjs.jpg" alt="Wood Cutting in Cameroon" class="point-image">
-                        
-                      <h2>5. Important Factors to Consider in Export</h2>
-      <p>Export karte waqt kuch key points hamesha dhyaan me rakhne chahiye:
-
-Product compliance with destination country regulations
-
-Correct HS code and customs duty structure
-
-Accurate documentation to avoid clearance delays
-
-Proper packaging and labeling
-
-Incoterms clarity (FOB, CIF, EXW etc.)
-
-Freight insurance
-
-Timely communication with freight forwarders & logistics partners.</p>
+      <img src="https://res.cloudinary.com/dktxmi2qq/image/upload/v1753879238/images_2_22_re6mjs.jpg" alt="Export Considerations" class="point-image">
+      <h2>5. Important Factors to Consider</h2>
+      <p>Accurate HS code, compliance, packaging, documentation aur freight insurance zaruri hai.</p>
     </div>
 
     <div class="point">
-      
-                        <img src="https://res.cloudinary.com/dktxmi2qq/image/upload/v1753879241/images_2_21_hvojmd.jpg" alt="Wood Cutting in Cameroon" class="point-image">
-      
-      
-      
-      
-      <h2>6. Important Documents to Collect from Buyer</h2>
-      <p>Exporter ko buyer se kuch crucial documents aur confirmations collect karne chahiye:
-
-Signed Purchase Order or Sales Contract
-
-Confirmed LC draft (agar LC mode hai)
-
-Import License copy (if applicable in buyer’s country)
-
-Delivery Instructions
-
-Port of Discharge details
-
-Any regulatory approvals needed for that country</p>
+      <img src="https://res.cloudinary.com/dktxmi2qq/image/upload/v1753879241/images_2_21_hvojmd.jpg" alt="Buyer Documents" class="point-image">
+      <h2>6. Documents to Collect from Buyer</h2>
+      <p>Purchase Order, LC copy, delivery instructions aur buyer’s country approvals lena important hota hai.</p>
     </div>
 
     <div class="point">
-      
-                        <img src="https://res.cloudinary.com/dktxmi2qq/image/upload/v1753879241/images_2_19_ayztsx.jpg" alt="Wood Cutting in Cameroon" class="point-image">
-      
-      
-      
-      
-      <h2>7. Freezone – A Strategic Export Advantage</h2>
-      <p>Dubai ke Freezones jaise JAFZA, DMCC, DAFZA, Dubai South exporters ke liye bohot beneficial hain.
-
-Benefits:
-
-100% foreign ownership allowed
-
-No import/export duty within Freezone
-
-No personal or corporate income tax (up to 50 years)
-
-Easy company setup with minimal bureaucracy
-
-Strategic warehouse and port access (e.g., Jebel Ali Port)
-
-Faster customs clearance & dedicated logistics services
-
-
-Note: Freezone se export karte waqt agar goods UAE mainland me nahi ja rahe to aapko VAT nahi dena hota.</p>
+      <img src="https://res.cloudinary.com/dktxmi2qq/image/upload/v1753879241/images_2_19_ayztsx.jpg" alt="Freezone Benefits" class="point-image">
+      <h2>7. Freezone – Strategic Advantage</h2>
+      <p>Freezones provide 100% ownership, no taxes, and fast customs clearance. Perfect for exporters!</p>
     </div>
-
   </div>
-
 </body>
 </html>
