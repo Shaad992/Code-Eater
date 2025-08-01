@@ -6,12 +6,8 @@
   <title>Expenses - CODE EATER</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
   <style>
-  
-  * {
-  -webkit-tap-highlight-color: transparent;
-}
-  
     * {
+      -webkit-tap-highlight-color: transparent;
       margin: 0;
       padding: 0;
       box-sizing: border-box;
@@ -92,24 +88,6 @@
       margin-top: 1rem;
     }
 
-    .glass-btn {
-      padding: 0.7rem 1.5rem;
-      background: rgba(255, 255, 255, 0.1);
-      border: 2px solid rgba(0, 0, 0, 0.2);
-      border-radius: 14px;
-      color: black;
-      font-size: 1rem;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .glass-btn:hover {
-      transform: scale(1.04);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
-    }
-
     .expense-item {
       list-style: none;
       padding: 0.5rem;
@@ -129,6 +107,58 @@
       padding: 10px;
       margin-bottom: 10px;
     }
+
+    /* 🎨 Multi-color 3D button */
+    .multi-btn {
+      position: relative;
+      padding: 0.7rem 1.5rem;
+      font-weight: bold;
+      color: #fff;
+      font-size: 1rem;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      background: transparent;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .multi-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: conic-gradient(
+        from 0deg,
+        #ff0055,
+        #ff7b00,
+        #ffeb00,
+        #00ff95,
+        #00c3ff,
+        #bd00ff,
+        #ff0055
+      );
+      z-index: -2;
+      animation: rotate 3s linear infinite;
+    }
+
+    .multi-btn::after {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      background: #0f0f0f;
+      border-radius: 10px;
+      z-index: -1;
+    }
+
+    .multi-btn:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 20px rgba(255, 0, 85, 0.4);
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body>
@@ -137,7 +167,7 @@
       <span>E</span><span>X</span><span>P</span><span>E</span><span>N</span><span>S</span><span>E</span><span>S</span>
     </h1>
     <div class="home-button">
-      <button onclick="location.href='index.html'" class="glass-btn">HOME</button>
+      <button onclick="location.href='index.html'" class="multi-btn">HOME</button>
     </div>
   </div>
 
@@ -147,7 +177,7 @@
       <p>Add Your Expense</p>
       <input type="text" id="expenseName" placeholder="Expense Name" style="margin:10px; padding:10px;" />
       <input type="number" id="expenseAmount" placeholder="Amount" style="margin:10px; padding:10px;" />
-      <button onclick="addExpense()" class="glass-btn">Add Entry</button>
+      <button onclick="addExpense()" class="multi-btn">Add Entry</button>
       <div style="margin-top: 1rem; text-align:center;">
         <p id="totalAmount">Total: ₹0</p>
       </div>
@@ -155,7 +185,7 @@
 
     <!-- Show Recycle Bin Button -->
     <div class="home-button">
-      <button onclick="toggleRecycleBin()" class="glass-btn">Show Recycle Bin</button>
+      <button onclick="toggleRecycleBin()" class="multi-btn">Show Recycle Bin</button>
     </div>
 
     <!-- List of Active Expenses -->
@@ -178,268 +208,105 @@
       messagingSenderId: "747936175998",
       appId: "1:747936175998:web:cc4f7bf3800488c3afc52f"
     };
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Expenses - DotWood Exports</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Orbitron', sans-serif;
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const expensesRef = collection(db, "expenses");
+
+    // Render Active Expenses
+    function renderExpenses(snapshot) {
+      const list = document.getElementById("expenseList");
+      const total = document.getElementById("totalAmount");
+      list.innerHTML = "";
+      let sum = 0;
+
+      snapshot.forEach(docSnap => {
+        const data = docSnap.data();
+        sum += data.amount;
+
+        const item = document.createElement("li");
+        item.className = "expense-item";
+
+        const dateObj = data.createdAt?.toDate?.();
+        const dateStr = dateObj ? dateObj.toLocaleString() : "No Date";
+
+        item.innerHTML = `
+          <div>
+            <strong>${data.name}</strong> - ₹${data.amount}<br>
+            <small style="color: gray;">${dateStr}</small>
+          </div>
+          <button class="multi-btn" onclick="deleteExpense('${docSnap.id}')">Delete</button>
+        `;
+
+        list.appendChild(item);
+      });
+
+      total.textContent = `Total: ₹${sum}`;
     }
 
-    body {
-      background-color: #000;
-      color: #fff;
-      padding: 20px;
-    }
+    // Add Expense
+    window.addExpense = async function () {
+      const name = document.getElementById("expenseName").value;
+      const amount = parseFloat(document.getElementById("expenseAmount").value);
 
-    h1 {
-      text-align: center;
-      margin-bottom: 10px;
-      color: silver;
-      text-shadow: 0 0 10px silver, 0 0 20px silver;
-    }
+      if (name && !isNaN(amount)) {
+        await addDoc(expensesRef, {
+          name,
+          amount,
+          createdAt: new Date()
+        });
 
-    .total-bar {
-      text-align: center;
-      font-size: 1.3rem;
-      color: #0f0;
-      margin-bottom: 10px;
-    }
-
-    .filter-bar {
-      text-align: center;
-      margin-bottom: 25px;
-    }
-
-    .filter-bar select {
-      padding: 10px;
-      font-size: 1rem;
-      border-radius: 5px;
-      border: none;
-      background: #222;
-      color: #fff;
-    }
-
-    .add-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-      margin-bottom: 30px;
-    }
-
-    .add-bar input {
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      width: 180px;
-      font-size: 1rem;
-    }
-
-    .add-bar button {
-      padding: 10px 20px;
-      background: silver;
-      color: #000;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
-      box-shadow: 0 0 10px silver, 0 0 20px silver;
-      transition: background 0.3s;
-    }
-
-    .add-bar button:hover {
-      background: #ccc;
-    }
-
-    ul {
-      list-style: none;
-      padding: 0;
-      max-width: 600px;
-      margin: auto;
-    }
-
-    li {
-      background: #111;
-      margin-bottom: 10px;
-      padding: 15px;
-      border-left: 4px solid silver;
-      position: relative;
-      box-shadow: 0 0 10px #444;
-      border-radius: 4px;
-    }
-
-    .date-time {
-      font-size: 0.8rem;
-      color: #999;
-      margin-top: 5px;
-    }
-
-    .delete-btn {
-      position: absolute;
-      right: 15px;
-      top: 15px;
-      background: transparent;
-      color: red;
-      border: none;
-      font-size: 1.2rem;
-      cursor: pointer;
-    }
-
-    @media (max-width: 600px) {
-      .add-bar {
-        flex-direction: column;
-        align-items: center;
+        document.getElementById("expenseName").value = '';
+        document.getElementById("expenseAmount").value = '';
       }
-
-      .add-bar input {
-        width: 90%;
-      }
-    }
-  </style>
-</head>
-<body>
-  <h1>Expense Tracker</h1>
-  
-  <div style="text-align: center; margin: 20px 0;">
-  <a href="index.html" style="
-    display: inline-block;
-    padding: 10px 20px;
-    color: silver;
-    border: 2px solid silver;
-    text-decoration: none;
-    font-size: 1.2rem;
-    border-radius: 8px;
-    text-shadow: 0 0 5px silver;
-    box-shadow: 0 0 10px silver;
-    transition: 0.3s;
-  " onmouseover="this.style.boxShadow='0 0 20px silver';" 
-     onmouseout="this.style.boxShadow='0 0 10px silver';">
-    🏠 Home
-  </a>
-</div>
-
-  <div class="total-bar">
-    Total: ₹<span id="totalAmount">0</span>
-  </div>
-
-  <div class="filter-bar">
-    <select id="monthFilter">
-      <option value="all">All Months</option>
-    </select>
-  </div>
-
-  <div class="add-bar">
-    <input type="text" id="expenseName" placeholder="Expense Name" />
-    <input type="number" id="expenseAmount" placeholder="Amount" />
-    <button onclick="addExpense()">Add</button>
-  </div>
-
-  <ul id="expenseList"></ul>
-
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-  import { getFirestore, collection, addDoc, deleteDoc, doc, onSnapshot, query } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyAdQPwSuIUCg-IzQyAT_bbLc-RcH08F4pk",
-    authDomain: "expenses-e37a3.firebaseapp.com",
-    projectId: "expenses-e37a3",
-    storageBucket: "expenses-e37a3.firebasestorage.app",
-    messagingSenderId: "747936175998",
-    appId: "1:747936175998:web:cc4f7bf3800488c3afc52f"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-  const expensesRef = collection(db, "expenses");
-
-  const nameInput = document.getElementById("expenseName");
-  const amountInput = document.getElementById("expenseAmount");
-  const list = document.getElementById("expenseList");
-  const totalAmount = document.getElementById("totalAmount");
-  const monthFilter = document.getElementById("monthFilter");
-
-  let expenses = [];
-
-  // Real-time data load
- onSnapshot(query(expensesRef), (snapshot) => {
-  expenses = [];
-  snapshot.forEach(doc => {
-    expenses.push({ id: doc.id, ...doc.data() });
-  });
-  populateMonthFilter();
-  
-  // Ensure rendering happens *after* filter is filled
-  setTimeout(renderExpenses, 100); 
-});
-
-  // Add expense to Firebase
-  window.addExpense = async function () {
-    const name = nameInput.value.trim();
-    const amountVal = amountInput.value.trim();
-    if (!name || !amountVal) return;
-
-    const amount = parseFloat(amountVal);
-    if (isNaN(amount) || amount <= 0) return;
-
-    const now = new Date();
-    const entry = {
-      name,
-      amount,
-      date: now.toLocaleDateString(),
-      time: now.toLocaleTimeString(),
-      month: `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`
     };
 
-    await addDoc(expensesRef, entry);
-    nameInput.value = "";
-    amountInput.value = "";
-  };
+    // Delete and move to Recycle Bin
+    window.deleteExpense = async function (id) {
+      const expenseDoc = doc(db, "expenses", id);
+      const docSnap = await getDoc(expenseDoc);
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        await addDoc(collection(db, "deletedExpenses"), data);
+        await deleteDoc(expenseDoc);
+      }
+    };
 
-  // Delete expense from Firebase
-  window.deleteExpense = async function (id) {
-    await deleteDoc(doc(db, "expenses", id));
-  };
+    // Toggle Recycle Bin
+    window.toggleRecycleBin = async function () {
+      const bin = document.getElementById("recycleBinList");
+      if (bin.style.display === "none") {
+        bin.style.display = "block";
+        bin.innerHTML = "<p style='text-align:center;'>Loading deleted expenses...</p>";
 
-  function renderExpenses() {
-    list.innerHTML = "";
-    let total = 0;
-    const selectedMonth = monthFilter.value;
+        const querySnapshot = await getDocs(collection(db, "deletedExpenses"));
+        bin.innerHTML = "";
 
-    expenses.slice().reverse().forEach(entry => {
-      if (selectedMonth !== "all" && entry.month !== selectedMonth) return;
+        if (querySnapshot.empty) {
+          bin.innerHTML = "<p style='text-align:center;'>No deleted expenses found.</p>";
+        } else {
+          querySnapshot.forEach(docSnap => {
+            const data = docSnap.data();
+            const dateObj = data.createdAt?.toDate?.();
+            const dateStr = dateObj ? dateObj.toLocaleString() : "No Date";
 
-      const li = document.createElement("li");
-      li.innerHTML = `
-        <strong>${entry.name}</strong> - ₹${entry.amount.toFixed(2)}
-        <div class="date-time">${entry.date} ${entry.time}</div>
-        <button class="delete-btn" onclick="deleteExpense('${entry.id}')">×</button>
-      `;
-      list.appendChild(li);
-      total += entry.amount;
-    });
+            const item = document.createElement("li");
+            item.innerHTML = `
+              <div>
+                <strong>${data.name}</strong> - ₹${data.amount}<br>
+                <small style="color: gray;">${dateStr}</small>
+              </div>
+            `;
+            bin.appendChild(item);
+          });
+        }
+      } else {
+        bin.style.display = "none";
+      }
+    };
 
-    totalAmount.innerText = total.toFixed(2);
-  }
-
-  function populateMonthFilter() {
-    const months = [...new Set(expenses.map(e => e.month))].sort().reverse();
-    monthFilter.innerHTML = `<option value="all">All Months</option>`;
-    months.forEach(month => {
-      const option = document.createElement("option");
-      option.value = month;
-      option.textContent = new Date(`${month}-01`).toLocaleString('default', { month: 'long', year: 'numeric' });
-      monthFilter.appendChild(option);
-    });
-  }
-</script>
+    // Realtime Sync
+    onSnapshot(expensesRef, renderExpenses);
+  </script>
 </body>
 </html>
