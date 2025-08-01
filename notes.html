@@ -41,17 +41,9 @@
     }
 
     @keyframes move {
-      0% {
-        transform: translateY(0) translateX(0);
-        opacity: 0.3;
-      }
-      50% {
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-100vh) translateX(100vw);
-        opacity: 0;
-      }
+      0% { transform: translateY(0) translateX(0); opacity: 0.3; }
+      50% { opacity: 1; }
+      100% { transform: translateY(-100vh) translateX(100vw); opacity: 0; }
     }
 
     .header {
@@ -85,30 +77,6 @@
     @keyframes bounce {
       from { transform: translateY(0); }
       to { transform: translateY(-6px); }
-    }
-
-    .home-button {
-      display: flex;
-      justify-content: center;
-      margin-top: 1rem;
-    }
-
-    .glass-btn {
-      padding: 0.7rem 1.5rem;
-      background: rgba(255, 255, 255, 0.2);
-      border: 2px solid rgba(0, 0, 0, 0.2);
-      border-radius: 14px;
-      color: black;
-      font-size: 1rem;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .glass-btn:hover {
-      transform: scale(1.04);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
     }
 
     .container {
@@ -175,6 +143,64 @@
       font-size: 0.85rem;
       opacity: 0.7;
     }
+
+    /* 🎨 3D multi-color layer buttons */
+    .multi-btn {
+      position: relative;
+      padding: 0.7rem 1.5rem;
+      font-weight: bold;
+      color: #fff;
+      font-size: 1rem;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      background: transparent;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .multi-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: conic-gradient(
+        from 0deg,
+        #ff0055,
+        #ff7b00,
+        #ffeb00,
+        #00ff95,
+        #00c3ff,
+        #bd00ff,
+        #ff0055
+      );
+      z-index: -2;
+      animation: rotate 3s linear infinite;
+    }
+
+    .multi-btn::after {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      background: #0f0f0f;
+      border-radius: 10px;
+      z-index: -1;
+    }
+
+    .multi-btn:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 20px rgba(255, 0, 85, 0.4);
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .home-button {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+    }
   </style>
 </head>
 <body>
@@ -194,7 +220,7 @@
       <span>N</span><span>O</span><span>T</span><span>E</span><span>S</span>
     </h1>
     <div class="home-button">
-      <button onclick="location.href='index.html'" class="glass-btn">HOME</button>
+      <button onclick="location.href='index.html'" class="multi-btn">HOME</button>
     </div>
   </div>
 
@@ -204,7 +230,7 @@
       <p>Add Your Note</p>
       <input type="text" id="noteTitle" placeholder="Note Title" />
       <textarea id="noteContent" placeholder="Note Content"></textarea>
-      <button onclick="addNote()" class="glass-btn">Add Note</button>
+      <button onclick="addNote()" class="multi-btn">Add Note</button>
     </div>
 
     <ul id="noteList"></ul>
@@ -241,7 +267,7 @@
             <strong>${data.title}</strong><br>
             <small>${data.content}</small>
           </div>
-          <button class="glass-btn" onclick="deleteNote('${docSnap.id}')">Delete</button>
+          <button class="multi-btn" onclick="deleteNote('${docSnap.id}')">Delete</button>
         `;
         list.appendChild(item);
       });
