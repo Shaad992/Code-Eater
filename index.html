@@ -15,56 +15,27 @@
 
     body {
       font-family: 'Orbitron', sans-serif;
-      background: #fdfdfd;
+      background: linear-gradient(135deg, #ff6a00, #fff0e0);
       transition: background 0.6s ease;
       overflow-x: hidden;
+      position: relative;
     }
-
-    .dark-bg {
-      background: #111;
-      color: white;
-    }
-
-    .firefly {
-      position: fixed;
-      width: 6px;
-      height: 6px;
-      background: black;
-      border-radius: 50%;
-      opacity: 0.8;
-      animation: fly 10s linear infinite;
-      pointer-events: none;
-      z-index: 0;
-      filter: blur(1px);
-    }
-
-    @keyframes fly {
-      0% { transform: translateY(0) translateX(0); opacity: 0; }
-      50% { opacity: 1; }
-      100% { transform: translateY(-100vh) translateX(100vw); opacity: 0; }
-    }
-
-    .fireflies { display: none; }
-    .dark-bg .fireflies { display: block; }
 
     header {
-      backdrop-filter: blur(12px);
-      background: rgba(255, 255, 255, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      border-radius: 16px;
-      padding: 24px 40px;
+      backdrop-filter: blur(20px);
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 16px 36px;
       box-shadow:
-        0 20px 50px rgba(0,0,0,0.25),
-        inset 0 2px 4px rgba(255,255,255,0.8),
-        inset 0 -3px 6px rgba(0,0,0,0.05);
+        0 30px 80px rgba(0,0,0,0.2),
+        0 0 8px rgba(255,255,255,0.4),
+        inset 0 5px 10px rgba(255,255,255,0.5),
+        inset 0 -4px 8px rgba(0,0,0,0.1);
       text-align: center;
-      margin: 25px auto;
+      margin: 40px auto;
       width: fit-content;
-      position: relative;
-      z-index: 2;
-      background-color: white;
-      transform: perspective(1000px) rotateX(0deg);
-      transition: all 0.4s ease;
+      background-color: #fff;
+      border: 1px solid rgba(255,255,255,0.5);
     }
 
     h1 {
@@ -74,26 +45,36 @@
     }
 
     h1 span {
-      font-size: 1.6rem;
-      color: #111;
+      font-size: 1.8rem;
       display: inline-block;
-      animation: bounce 1.8s ease-in-out infinite;
+      animation: bounce 2s ease-in-out infinite;
       transform: rotateY(15deg);
-      text-shadow: 1px 1px 0 #ccc, 2px 2px 4px rgba(0,0,0,0.15);
+      text-shadow:
+        0 0 4px #fff,
+        0 0 8px currentColor,
+        0 0 14px currentColor;
+      font-weight: bold;
     }
 
-    h1 span:nth-child(2n) { transform: rotateY(-15deg); }
-    h1 span:nth-child(5) { width: 12px; transform: none; animation: none; }
+    h1 span:nth-child(2n) {
+      transform: rotateY(-15deg);
+    }
 
-    h1 span:nth-child(1) { animation-delay: 0s; }
-    h1 span:nth-child(2) { animation-delay: 0.1s; }
-    h1 span:nth-child(3) { animation-delay: 0.2s; }
-    h1 span:nth-child(4) { animation-delay: 0.3s; }
-    h1 span:nth-child(6) { animation-delay: 0.4s; }
-    h1 span:nth-child(7) { animation-delay: 0.5s; }
-    h1 span:nth-child(8) { animation-delay: 0.6s; }
-    h1 span:nth-child(9) { animation-delay: 0.7s; }
-    h1 span:nth-child(10){ animation-delay: 0.8s; }
+    h1 span:nth-child(5) {
+      width: 10px;
+      transform: none;
+      animation: none;
+    }
+
+    h1 span:nth-child(1)  { color: #ff004f; animation-delay: 0s; }
+    h1 span:nth-child(2)  { color: #0099ff; animation-delay: 0.1s; }
+    h1 span:nth-child(3)  { color: #00ff99; animation-delay: 0.2s; }
+    h1 span:nth-child(4)  { color: #ffcc00; animation-delay: 0.3s; }
+    h1 span:nth-child(6)  { color: #ff6600; animation-delay: 0.4s; }
+    h1 span:nth-child(7)  { color: #9933ff; animation-delay: 0.5s; }
+    h1 span:nth-child(8)  { color: #00ccff; animation-delay: 0.6s; }
+    h1 span:nth-child(9)  { color: #66ff66; animation-delay: 0.7s; }
+    h1 span:nth-child(10) { color: #ff3366; animation-delay: 0.8s; }
 
     @keyframes bounce {
       0%, 100% { transform: translateY(0) rotateY(15deg); }
@@ -101,188 +82,107 @@
     }
 
     h2 {
-      font-size: 0.9rem;
+      font-size: 1rem;
       color: #333;
       margin-top: 8px;
       letter-spacing: 0.6px;
-      text-shadow: 1px 1px 0 #ddd, 1.5px 1.5px 3px rgba(0,0,0,0.08);
+      text-shadow: 1px 1px 0 #fff, 2px 2px 6px rgba(0,0,0,0.1);
     }
 
     .button-frame {
       margin: 40px auto;
-      padding: 45px;
-      width: 85%;
-      border-radius: 22px;
-      background: linear-gradient(to bottom right, #ffffff, #f0f0f0);
+      padding: 50px 30px;
+      width: 90%;
+      max-width: 960px;
+      border-radius: 30px;
+      background: linear-gradient(to bottom right, #ffffff, #f7eedd);
       box-shadow:
-        0 25px 60px rgba(0,0,0,0.2),
-        inset 0 2px 2px rgba(255,255,255,0.7),
-        inset 0 -3px 5px rgba(0,0,0,0.1);
+        0 30px 100px rgba(0,0,0,0.3),
+        inset 0 4px 6px rgba(255,255,255,0.8),
+        inset 0 -4px 10px rgba(0,0,0,0.1);
     }
 
     .buttons {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 20px;
+      gap: 28px;
     }
 
     button {
       font-family: 'Orbitron', sans-serif;
       font-size: 1rem;
-      padding: 16px 32px;
+      padding: 16px 40px;
       border: none;
-      border-radius: 16px;
-      background: linear-gradient(145deg, #ffffff, #e0e0e0);
-      color: #222;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #ffffff, #dcdcdc);
+      color: #111;
       cursor: pointer;
-      transition: all 0.35s ease;
+      transition: all 0.4s ease;
       box-shadow:
-        0 12px 24px rgba(0,0,0,0.2),
-        inset 0 -4px 6px rgba(0,0,0,0.1),
-        inset 0 2px 3px rgba(255,255,255,0.7);
-      transform: perspective(500px) translateZ(10px);
-    }
-
-    button:hover {
-      background: linear-gradient(145deg, #f8f8f8, #d8d8d8);
-      transform: translateY(-6px) scale(1.06);
-      box-shadow:
-        0 16px 32px rgba(0,0,0,0.25),
-        inset 0 -2px 4px rgba(0,0,0,0.2);
-    }
-
-    button:active {
-      transform: translateY(2px);
-      box-shadow:
-        inset 0 3px 6px rgba(0,0,0,0.3),
-        0 2px 6px rgba(0,0,0,0.2);
-    }
-
-    .footer-toggle {
-      position: fixed;
-      bottom: 1px;
-      left: 20px;
-      height: 30px;
-      width: 60px;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      z-index: 999;
-      background: rgba(255,255,255,0.85);
-      backdrop-filter: blur(10px);
-      box-shadow:
-        0 5px 15px rgba(0,0,0,0.3),
-        inset 0 1px 2px rgba(255,255,255,0.6),
-        inset 0 -2px 4px rgba(0,0,0,0.1);
-      transition: all 0.6s ease;
-    }
-
-    .footer-toggle.open {
-      width: 200px;
-      justify-content: flex-start;
-      padding-left: 16px;
-      background: linear-gradient(to right, #ffffff, #cc5500);
-      box-shadow:
-        0 0 20px #ff9500,
-        0 0 30px #ffcc00,
-        0 0 10px cyan;
-    }
-
-    .footer-toggle.open::before {
-      content: '';
-      position: absolute;
-      top: -6px;
-      left: -6px;
-      right: -6px;
-      bottom: -6px;
-      background: conic-gradient(red, orange, yellow, lime, cyan, blue, violet, red);
-      border-radius: 32px;
-      z-index: -2;
-      animation: rotate 4s linear infinite;
-      box-shadow: 0 0 20px rgba(0,255,255,0.4);
-    }
-
-    .footer-toggle.open::after {
-      content: '';
-      position: absolute;
-      top: 2px;
-      left: 4px;
-      right: 4px;
-      bottom: 4px;
-      background: linear-gradient(to right, #ffffff, white);
-      border-radius: 26px;
-      z-index: -1;
-    }
-
-    .arrow-icon {
-      animation: bounceArrow 1.2s ease-in-out infinite;
-      filter: drop-shadow(0 0 4px white) drop-shadow(0 0 8px white);
-      transition: transform 0.5s ease;
-      z-index: 2;
+        0 18px 40px rgba(0,0,0,0.2),
+        inset 0 -4px 8px rgba(0,0,0,0.1),
+        inset 0 2px 6px rgba(255,255,255,0.8);
       position: relative;
+      overflow: hidden;
     }
 
-    .footer-toggle.open .arrow-icon {
-      transform: rotate(180deg);
-    }
-
-    @keyframes bounceArrow {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-4px); }
-    }
-
-    .footer-text {
-      margin-left: 12px;
-      color: black;
-      font-size: 0.75rem;
-      white-space: nowrap;
+    button::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.35), transparent 70%);
       opacity: 0;
       transition: opacity 0.4s ease;
-      font-family: 'Orbitron', sans-serif;
-      z-index: 2;
+      pointer-events: none;
     }
 
-    .footer-toggle.open .footer-text {
+    button:hover::after {
       opacity: 1;
     }
 
-    @keyframes rotate {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    button:hover {
+      transform: translateY(-10px) scale(1.08);
+      background: linear-gradient(135deg, #fefefe, #cfcfcf);
+      box-shadow:
+        0 25px 60px rgba(0,0,0,0.3),
+        inset 0 -2px 5px rgba(0,0,0,0.2);
     }
 
-    .emoji {
-      font-size: 20px;
-      margin-right: 6px;
-      animation: bounceEmoji 1.2s ease-in-out infinite;
+    button:active {
+      transform: translateY(2px) scale(0.98);
+      box-shadow:
+        inset 0 5px 12px rgba(0,0,0,0.3),
+        0 3px 8px rgba(0,0,0,0.15);
     }
 
-    @keyframes bounceEmoji {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
+    a {
+      text-decoration: none;
+    }
+
+    /* Optional Floating Glow on Button */
+    button::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 60%);
+      transform: rotate(45deg);
+      animation: glow 4s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes glow {
+      0% { transform: translateX(0) rotate(45deg); }
+      100% { transform: translateX(100%) rotate(45deg); }
     }
   </style>
 </head>
 <body>
-
-  <!-- Fireflies -->
-  <div class="fireflies">
-    <div class="firefly" style="top:90%; left:5%; animation-delay: 0s;"></div>
-    <div class="firefly" style="top:85%; left:15%; animation-delay: 1s;"></div>
-    <div class="firefly" style="top:82%; left:25%; animation-delay: 2s;"></div>
-    <div class="firefly" style="top:88%; left:35%; animation-delay: 3s;"></div>
-    <div class="firefly" style="top:86%; left:45%; animation-delay: 4s;"></div>
-    <div class="firefly" style="top:85%; left:55%; animation-delay: 5s;"></div>
-    <div class="firefly" style="top:83%; left:65%; animation-delay: 6s;"></div>
-    <div class="firefly" style="top:84%; left:75%; animation-delay: 7s;"></div>
-    <div class="firefly" style="top:89%; left:85%; animation-delay: 8s;"></div>
-    <div class="firefly" style="top:87%; left:95%; animation-delay: 9s;"></div>
-  </div>
 
   <!-- Header -->
   <header>
@@ -293,7 +193,7 @@
     <h2>Emira Trip</h2>
   </header>
 
-  <!-- Buttons -->
+  <!-- Button Panel -->
   <div class="button-frame">
     <div class="buttons">
       <a href="expenses.html"><button>EXPENSES</button></a>
@@ -304,22 +204,5 @@
     </div>
   </div>
 
-  <!-- Footer Toggle -->
-  <button class="footer-toggle" onclick="toggleFooter(this)">
-
-    <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="cyan" width="22" height="22">
-      <path d="M10 17l5-5-5-5v10z"/>
-    </svg>
-    <span class="footer-text">MADE BY SHAAD</span>
-  </button>
-
-  <!-- Script -->
-  <script>
-    function toggleFooter(el) {
-      el.classList.toggle("open");
-      document.body.classList.toggle("dark-bg");
-    }
-
-  </script>
 </body>
 </html>
