@@ -20,16 +20,22 @@
       overflow-x: hidden;
     }
 
+    .dark-bg {
+      background: #111;
+      color: white;
+    }
+
     .firefly {
       position: fixed;
-      width: 5px;
-      height: 5px;
-      background: cyan;
+      width: 6px;
+      height: 6px;
+      background: black;
       border-radius: 50%;
       opacity: 0.8;
       animation: fly 10s linear infinite;
-      z-index: 0;
       pointer-events: none;
+      z-index: 0;
+      filter: blur(1px);
     }
 
     @keyframes fly {
@@ -43,19 +49,22 @@
 
     header {
       backdrop-filter: blur(12px);
-      background: rgba(255, 255, 255, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.4);
       border-radius: 16px;
-      padding: 20px 35px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15),
-                  inset 0 1px 1px rgba(255,255,255,0.6),
-                  inset 0 -2px 3px rgba(0,0,0,0.05);
+      padding: 24px 40px;
+      box-shadow:
+        0 20px 50px rgba(0,0,0,0.25),
+        inset 0 2px 4px rgba(255,255,255,0.8),
+        inset 0 -3px 6px rgba(0,0,0,0.05);
       text-align: center;
-      margin: 20px auto;
+      margin: 25px auto;
       width: fit-content;
       position: relative;
       z-index: 2;
       background-color: white;
+      transform: perspective(1000px) rotateX(0deg);
+      transition: all 0.4s ease;
     }
 
     h1 {
@@ -65,7 +74,7 @@
     }
 
     h1 span {
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       color: #111;
       display: inline-block;
       animation: bounce 1.8s ease-in-out infinite;
@@ -74,11 +83,7 @@
     }
 
     h1 span:nth-child(2n) { transform: rotateY(-15deg); }
-    h1 span:nth-child(5) {
-      width: 12px;
-      transform: none;
-      animation: none;
-    }
+    h1 span:nth-child(5) { width: 12px; transform: none; animation: none; }
 
     h1 span:nth-child(1) { animation-delay: 0s; }
     h1 span:nth-child(2) { animation-delay: 0.1s; }
@@ -104,103 +109,119 @@
     }
 
     .button-frame {
-      margin: 10px auto;
-      padding: 30px 40px;
-      width: 70%;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.3);
-      background: rgba(255,255,255,0.15);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15),
-                  inset 0 1px 1px rgba(255,255,255,0.4),
-                  inset 0 -2px 3px rgba(0,0,0,0.05);
-      position: relative;
-      z-index: 3;
+      margin: 40px auto;
+      padding: 45px;
+      width: 85%;
+      border-radius: 22px;
+      background: linear-gradient(to bottom right, #ffffff, #f0f0f0);
+      box-shadow:
+        0 25px 60px rgba(0,0,0,0.2),
+        inset 0 2px 2px rgba(255,255,255,0.7),
+        inset 0 -3px 5px rgba(0,0,0,0.1);
     }
 
     .buttons {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 15px;
+      gap: 20px;
     }
 
     button {
       font-family: 'Orbitron', sans-serif;
-      font-size: 0.85rem;
-      padding: 10px 20px;
+      font-size: 1rem;
+      padding: 16px 32px;
       border: none;
-      background: #eee;
-      border-radius: 10px;
-      box-shadow: inset 0 -3px 5px rgba(0,0,0,0.2),
-                  0 5px 10px rgba(0,0,0,0.15);
-      transition: transform 0.3s ease, background 0.3s ease;
+      border-radius: 16px;
+      background: linear-gradient(145deg, #ffffff, #e0e0e0);
+      color: #222;
       cursor: pointer;
-      outline: none;
-      user-select: none;
+      transition: all 0.35s ease;
+      box-shadow:
+        0 12px 24px rgba(0,0,0,0.2),
+        inset 0 -4px 6px rgba(0,0,0,0.1),
+        inset 0 2px 3px rgba(255,255,255,0.7);
+      transform: perspective(500px) translateZ(10px);
+    }
+
+    button:hover {
+      background: linear-gradient(145deg, #f8f8f8, #d8d8d8);
+      transform: translateY(-6px) scale(1.06);
+      box-shadow:
+        0 16px 32px rgba(0,0,0,0.25),
+        inset 0 -2px 4px rgba(0,0,0,0.2);
     }
 
     button:active {
       transform: translateY(2px);
+      box-shadow:
+        inset 0 3px 6px rgba(0,0,0,0.3),
+        0 2px 6px rgba(0,0,0,0.2);
     }
 
     .footer-toggle {
       position: fixed;
-      bottom: 20px;
+      bottom: 1px;
       left: 20px;
-      height: 50px;
-      width: 50px;
+      height: 30px;
+      width: 60px;
       border: none;
-      border-radius: 25px;
-      color: white;
+      border-radius: 30px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
       z-index: 999;
-      background: white;
-      box-shadow: 0 0 10px black, 0 0 20px black;
-      transition: all 0.5s ease;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(10px);
+      box-shadow:
+        0 5px 15px rgba(0,0,0,0.3),
+        inset 0 1px 2px rgba(255,255,255,0.6),
+        inset 0 -2px 4px rgba(0,0,0,0.1);
+      transition: all 0.6s ease;
     }
 
     .footer-toggle.open {
-      width: 220px;
+      width: 200px;
       justify-content: flex-start;
       padding-left: 16px;
-      background: transparent;
-      box-shadow: none;
+      background: linear-gradient(to right, #ffffff, #cc5500);
+      box-shadow:
+        0 0 20px #ff9500,
+        0 0 30px #ffcc00,
+        0 0 10px cyan;
     }
 
     .footer-toggle.open::before {
       content: '';
       position: absolute;
-      top: -4px;
-      left: -4px;
-      right: -4px;
-      bottom: -4px;
+      top: -6px;
+      left: -6px;
+      right: -6px;
+      bottom: -6px;
       background: conic-gradient(red, orange, yellow, lime, cyan, blue, violet, red);
-      border-radius: 30px;
+      border-radius: 32px;
       z-index: -2;
-      animation: rotate 3s linear infinite;
-      box-shadow: 0 0 12px rgba(0,255,255,0.3);
+      animation: rotate 4s linear infinite;
+      box-shadow: 0 0 20px rgba(0,255,255,0.4);
     }
 
     .footer-toggle.open::after {
       content: '';
       position: absolute;
-      top: 3px;
-      left: 3px;
-      right: 3px;
-      bottom: 3px;
-      background: black;
-      border-radius: 25px;
+      top: 2px;
+      left: 4px;
+      right: 4px;
+      bottom: 4px;
+      background: linear-gradient(to right, #ffffff, white);
+      border-radius: 26px;
       z-index: -1;
     }
 
     .arrow-icon {
       animation: bounceArrow 1.2s ease-in-out infinite;
-      filter: drop-shadow(0 0 4px cyan) drop-shadow(0 0 8px cyan);
+      filter: drop-shadow(0 0 4px white) drop-shadow(0 0 8px white);
       transition: transform 0.5s ease;
       z-index: 2;
       position: relative;
@@ -217,13 +238,12 @@
 
     .footer-text {
       margin-left: 12px;
-      color: cyan;
+      color: black;
       font-size: 0.75rem;
       white-space: nowrap;
       opacity: 0;
       transition: opacity 0.4s ease;
       font-family: 'Orbitron', sans-serif;
-      text-shadow: 0 0 2px cyan;
       z-index: 2;
     }
 
@@ -234,10 +254,6 @@
     @keyframes rotate {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
-    }
-
-    .dark-bg {
-      background: #111;
     }
 
     .emoji {
@@ -268,7 +284,7 @@
     <div class="firefly" style="top:87%; left:95%; animation-delay: 9s;"></div>
   </div>
 
-  <!-- Heading -->
+  <!-- Header -->
   <header>
     <h1>
       <span>C</span><span>O</span><span>D</span><span>E</span><span>&nbsp;</span>
@@ -290,7 +306,7 @@
 
   <!-- Footer Toggle -->
   <button class="footer-toggle" onclick="toggleFooter(this)">
-    <span class="emoji">😄</span>
+
     <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="cyan" width="22" height="22">
       <path d="M10 17l5-5-5-5v10z"/>
     </svg>
@@ -304,13 +320,6 @@
       document.body.classList.toggle("dark-bg");
     }
 
-    const emojiEl = document.querySelector('.emoji');
-    const emojiList = ['🕷'];
-    let emojiIndex = 0;
-    setInterval(() => {
-      emojiIndex = (emojiIndex + 1) % emojiList.length;
-      emojiEl.textContent = emojiList[emojiIndex];
-    }, 1500);
   </script>
 </body>
 </html>
